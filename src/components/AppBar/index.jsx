@@ -10,6 +10,7 @@ import Templates from './Menus/Templates'
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications'
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation'
 import Profiles from './Menus/Profiles'
+import { LibraryAdd } from '@mui/icons-material'
 
 
 function AppBar() {
@@ -38,7 +39,7 @@ function AppBar() {
           <Recent />
           <Starred />
           <Templates />
-          <Button variant="outlined">Create</Button>
+          <Button variant="outlined" endIcon={<LibraryAdd />}>Create</Button>
         </Box>
 
       </Box>
