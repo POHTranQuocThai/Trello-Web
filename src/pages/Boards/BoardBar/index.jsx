@@ -5,16 +5,16 @@ import AddToDriveIcon from '@mui/icons-material/AddToDrive'
 import BoltIcon from '@mui/icons-material/Bolt'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
+
 
 const MENU_STYLE = {
-  color: 'primary.main',
-  bgcolor: 'white',
+  color: 'white',
+  bgcolor: 'transparent',
   border: 'none',
   paddingX: '5px',
   borderRadius: '4px',
-  '& .MuiSvgIcon-root': {
-    color: 'primary.main'
+  '.MuiSvgIcon-root': {
+    color: 'white'
   },
   '&:hover': {
     bgcolor: 'primary.50'
@@ -32,8 +32,11 @@ function BoardBar() {
         justifyContent: 'space-between',
         gap: 2,
         overflowX: 'auto',
-        borderTop: '1px solid #00bfa5',
-        paddingX: 2
+        bgcolor: (theme) => (
+          theme.palette.mode === 'dark' ? '#2c3e50' : '#1975dc'
+        ),
+        paddingX: 2,
+        borderBottom: '1px solid white'
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -59,14 +62,24 @@ function BoardBar() {
           clickable />
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Button variant="outlined" startIcon={<PersonAddIcon />}>Invite</Button>
+        <Button
+          variant="outlined"
+          startIcon={<PersonAddIcon />}
+          sx={{
+            color: 'white',
+            BorderColor: 'white',
+            '&:hover': { borderColor: 'white' }
+          }}
+        >Invite</Button>
         <AvatarGroup
           max={5}
           sx={{
+            gap: 1,
             '& .MuiAvatar-root': {
               width: 34,
               height: 34,
-              fontSize: 16
+              fontSize: 16,
+              border: 'none'
             }
           }}
         >
@@ -126,7 +139,7 @@ function BoardBar() {
           </Tooltip>
         </AvatarGroup>
       </Box>
-    </Box>
+    </Box >
   )
 }
 
