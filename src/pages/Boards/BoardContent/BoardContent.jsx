@@ -1,13 +1,12 @@
 import { Box } from '@mui/material'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utils/sorts'
-import { DndContext, useSensor, useSensors, MouseSensor, TouchSensor, DragOverlay, defaultDropAnimationSideEffects, closestCorners } from '@dnd-kit/core'
-import { useEffect, useState } from 'react'
+import { DndContext, useSensor, useSensors, MouseSensor, TouchSensor, DragOverlay, defaultDropAnimationSideEffects, closestCorners, rectIntersection, pointerWithin, getFirstCollision, closestCenter } from '@dnd-kit/core'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card/Card'
 import { cloneDeep } from 'lodash'
-
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
@@ -27,6 +26,8 @@ function BoardContent({ board }) {
   const [activeDragItemType, setActiveDragItemType] = useState(null)
   const [activeDragItemData, setActiveDragItemData] = useState(null)
   const [oldColumnWhenDraggingCard, setOldColumnWhenDraggingCard] = useState(null)
+  //Điểm va chạm cuối cùng trước đó video 37
+  const lastOverId = useRef(null)
 
   const moveCardBetweenDifferentColumns = (
     overColumn,
@@ -182,10 +183,38 @@ function BoardContent({ board }) {
   const customDropAnimation = {
     sideEffects: defaultDropAnimationSideEffects({ styles: { active: { opacity: '0.5' } } })
   }
+
+  const collisionDetectionStrategy = useCallback((args) => {
+    //Trường hợp kéo column thì dùng closestCorners
+    if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) {
+      return closestCorners({ ...args })
+    }
+    //Tìm điểm giao nhau, va chạm - intersection với con trỏ
+    const pointerIntersections = pointerWithin(args)
+    const intersections = !!pointerIntersections?.length ?
+      pointerIntersections : rectIntersection(args)
+    //Tìm overId đầu tiên trong đám intersection ở trên
+    let overId = getFirstCollision(intersections, 'id')
+    if (overId) {
+      const checkColumn = orderedColumnsState.find(column => column._id === overId)
+      if (checkColumn) {
+        overId = closestCenter({
+          ...args,
+          droppableContainers: args.droppableContainers.filter(container => {
+            return (container.id !== overId) && (checkColumn?.cardOrderIds?.includes(container.id))
+          })
+        })[0]?.id
+      }
+      lastOverId.current = overId
+      return [{ id: overId }]
+    }
+
+    return lastOverId.current ? [{ id: lastOverId.current }] : []
+  }, [activeDragItemType])
   return (
     <DndContext onDragEnd={handleDragEnd} sensors={sensors}
       onDragStart={handleDragStart} onDragOver={handleDragOver}
-      collisionDetection={closestCorners}
+      collisionDetection={collisionDetectionStrategy}
     >
       <Box
         sx={{
