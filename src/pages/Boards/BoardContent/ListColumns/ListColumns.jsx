@@ -4,6 +4,7 @@ import AddchartIcon from '@mui/icons-material/Addchart'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
+import { toast } from 'react-toastify'
 
 
 function ListColumns({ columns }) {
@@ -12,7 +13,7 @@ function ListColumns({ columns }) {
   const [newColumnTitle, setNewColumnTitle] = useState('')
   const addNewColumn = () => {
     if (!newColumnTitle) {
-      //xuat error
+      toast.error('The title must not be empty!')
       return
     }
     toggleOpenNewColumnForm()
