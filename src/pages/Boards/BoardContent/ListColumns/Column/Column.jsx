@@ -18,6 +18,7 @@ import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import CloseIcon from '@mui/icons-material/Close'
+import { toast } from 'react-toastify'
 
 function Column({ column }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging
@@ -45,7 +46,7 @@ function Column({ column }) {
   const [newCardTitle, setNewCardTitle] = useState('')
   const addNewCard = () => {
     if (!newCardTitle) {
-      //xuat error
+      toast.error('The title must not be empty!', { position: 'bottom-right' })
       return
     }
     toggleOpenNewCardForm()
