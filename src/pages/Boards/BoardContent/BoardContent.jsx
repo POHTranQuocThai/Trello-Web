@@ -9,11 +9,12 @@ import Card from './ListColumns/Column/ListCards/Card/Card'
 import { cloneDeep, isEmpty } from 'lodash'
 import { generatePlaceholderCard } from '~/utils/formatters'
 import { MouseSensor, TouchSensor } from '~/customLibraries/dndKitSensors'
+
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
-function BoardContent({ board }) {
+function BoardContent({ board, createNewColumn, createNewCard }) {
   //const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   // Yêu cầu chuột di chuyển 10px thì mới kích hoạt eventt, fix trường hợp click bị gọi eventt
   const mouseSensor = useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
@@ -218,6 +219,8 @@ function BoardContent({ board }) {
 
     return lastOverId.current ? [{ id: lastOverId.current }] : []
   }, [activeDragItemType])
+
+
   return (
     <DndContext onDragEnd={handleDragEnd} sensors={sensors}
       onDragStart={handleDragStart} onDragOver={handleDragOver}
@@ -232,7 +235,7 @@ function BoardContent({ board }) {
           p: '10px 0'
         }}
       >
-        <ListColumns columns={orderedColumnsState} />
+        <ListColumns columns={orderedColumnsState} createNewColumn={createNewColumn} createNewCard={createNewCard} />
         <DragOverlay dropAnimation={customDropAnimation}>
           {!activeDragItemType && null}
           {(activeDragItemId && activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemData} />}
