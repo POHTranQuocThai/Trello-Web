@@ -14,7 +14,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
-function BoardContent({ board, createNewColumn, createNewCard }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
   //const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
   // Yêu cầu chuột di chuyển 10px thì mới kích hoạt eventt, fix trường hợp click bị gọi eventt
   const mouseSensor = useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
@@ -179,6 +179,8 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
         //col sau khi keo tha
         const dndOrderedColumns = arrayMove(orderedColumnsState, oldIndex, newIndex)
         //const dndOrderedColumnsIds = dndOrderedColumns.map(c => c._id)
+
+        moveColumns(dndOrderedColumns)
         setOrderedColumnsState(dndOrderedColumns)
       }
     }
@@ -220,7 +222,7 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
     return lastOverId.current ? [{ id: lastOverId.current }] : []
   }, [activeDragItemType])
 
-
+  // activeDragItemType
   return (
     <DndContext onDragEnd={handleDragEnd} sensors={sensors}
       onDragStart={handleDragStart} onDragOver={handleDragOver}
