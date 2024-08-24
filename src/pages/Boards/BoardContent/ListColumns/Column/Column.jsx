@@ -39,12 +39,12 @@ function Column({ column, createNewCard }) {
   const handleClose = () => {
     setAnchorEl(null)
   }
-  const orderCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+  const orderCards = column.cards
 
   const [openNewCardForm, setOpenNewCardForm] = useState(false)
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
   const [newCardTitle, setNewCardTitle] = useState('')
-  const addNewCard = async () => {
+  const addNewCard = () => {
     if (!newCardTitle) {
       toast.error('The title must not be empty!', { position: 'bottom-right' })
       return
@@ -54,9 +54,13 @@ function Column({ column, createNewCard }) {
       title: newCardTitle,
       columnId: column._id
     }
-    await createNewCard(newCardData)
+    createNewCard(newCardData)
     toggleOpenNewCardForm()
     setNewCardTitle('')
+  }
+  //Xử lí xóa một column và cards bên trong nó
+  const handleDeleteColumn = () => {
+
   }
   return (
     <div ref={setNodeRef}
@@ -111,14 +115,17 @@ function Column({ column, createNewCard }) {
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
+              onClick={handleClose}
               MenuListProps={{
                 'aria-labelledby': 'basic-button-dropdown'
               }}
             >
               <MenuList>
-                <MenuItem>
+                <MenuItem
+                  onClick={toggleOpenNewCardForm}
+                  sx={{ '&:hover': { color: 'success.light', '& .add-card-icon': { color: 'success.light' } } }}>
                   <ListItemIcon>
-                    <AddCardIcon fontSize="small" />
+                    <AddCardIcon fontSize="small" className='add-card-icon' />
                   </ListItemIcon>
                   <ListItemText>Add New Card</ListItemText>
                 </MenuItem>
@@ -150,9 +157,11 @@ function Column({ column, createNewCard }) {
                   </Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem>
+                <MenuItem
+                  onClick={handleDeleteColumn}
+                  sx={{ '&:hover': { color: 'warning.dark', '& .delete-forever': { color: 'warning.dark' } } }}>
                   <ListItemIcon>
-                    <DeleteForeverIcon fontSize="small" />
+                    <DeleteForeverIcon className='delete-forever' fontSize="small" />
                   </ListItemIcon>
                   <ListItemText>Delete this column</ListItemText>
                 </MenuItem>
