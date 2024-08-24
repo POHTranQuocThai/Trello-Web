@@ -24,6 +24,7 @@
     "@mui/material": "^5.16.7",
     "axios": "^1.5.1",
     "lodash": "^4.17.21",
+    "material-ui-confirm": "^3.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.26.1",
