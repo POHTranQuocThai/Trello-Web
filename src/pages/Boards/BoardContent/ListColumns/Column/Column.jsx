@@ -19,8 +19,9 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
+import { useConfirm } from 'material-ui-confirm'
 
-function Column({ column, createNewCard }) {
+function Column({ column, createNewCard, deleteColumnDetails }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging
   } = useSortable({ id: column._id, data: { ...column } })
 
@@ -59,8 +60,20 @@ function Column({ column, createNewCard }) {
     setNewCardTitle('')
   }
   //Xử lí xóa một column và cards bên trong nó
+  const confirmDeleteColumn = useConfirm()
   const handleDeleteColumn = () => {
+    confirmDeleteColumn({
+      title: 'Delete Column?',
+      description: 'This action will permanently delete your Column and its Cards! Are you sure?',
 
+      confirmationText: 'Confirm',
+      cancellationText: 'Cancel'
+      //Đã đặt mặc định ở compoment cha
+      // allowClose: false,
+      // dialogProps: { maxWidth: 'xs' },
+      // confirmationButtonProps: { color: 'secondary', variant: 'outlined' },
+      // cancellationButtonProps: { color: 'inherit' }
+    }).then(() => deleteColumnDetails(column._id)).catch(() => { })
   }
   return (
     <div ref={setNodeRef}
