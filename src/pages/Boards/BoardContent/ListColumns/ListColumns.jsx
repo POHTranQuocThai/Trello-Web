@@ -5,13 +5,20 @@ import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortabl
 import { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
+import { createNewColumnAPI } from '~/apis'
+import { generatePlaceholderCard } from '~/utils/formatters'
+import { cloneDeep } from 'lodash'
+import { useDispatch } from 'react-redux'
+import { updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
 
 
-function ListColumns({ columns, createNewColumn, createNewCard, deleteColumnDetails }) {
+function ListColumns({ columns }) {
+  const board = useSelector(selectCurrentActiveBoard)
+  const dispatch = useDispatch()
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
   const [newColumnTitle, setNewColumnTitle] = useState('')
-  const addNewColumn = () => {
+  const addNewColumn = async () => {
     if (!newColumnTitle) {
       toast.error('Please enter Column title!')
       return
@@ -20,7 +27,23 @@ function ListColumns({ columns, createNewColumn, createNewCard, deleteColumnDeta
     const newColumnData = {
       title: newColumnTitle
     }
-    createNewColumn(newColumnData)
+    const createdColumn = await createNewColumnAPI({
+      ...newColumnData, // copy lại dữ liệu
+      boardId: board._id //gán boardId
+    })
+
+    //Khi tạo col mới thì chưa có giá trị , cần xử lý vấn đề kéo thả vào một column rỗng
+    const placeholderCard = generatePlaceholderCard(createdColumn)
+    createdColumn.cards = [placeholderCard]
+    createdColumn.cardOrderIds = [placeholderCard._id]
+    //Cập nhật state board
+    //Phía FE chúng ta phải tự làm đúng lại state data board (thay vì gọi fetchAPI)
+    //Lưu ý: cách làm này phụ thuộc vào tùy lựa chọn và đặc thù dự án, có nơi thì BE sẽ hỗ trợ trả về luôn toàn bộ board
+    // dù đây có là api tạo Col hay card đi chăng nữa
+    const newBoard = cloneDeep(board)
+    newBoard.columns.push(createdColumn)
+    newBoard.columnOrderIds.push(createdColumn._id)
+    dispatch(updateCurrentActiveBoard(newBoard))
     toggleOpenNewColumnForm()
     setNewColumnTitle('')
   }
@@ -37,7 +60,7 @@ function ListColumns({ columns, createNewColumn, createNewCard, deleteColumnDeta
           '&::-webkit-scrollbar-track': { m: 2 }
         }}
       >
-        {columns?.map(column => <Column key={column._id} column={column} createNewCard={createNewCard} deleteColumnDetails={deleteColumnDetails} />)}
+        {columns?.map(column => <Column key={column._id} column={column} />)}
 
         {/* Box Add New Column */}
         {!openNewColumnForm ?

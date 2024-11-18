@@ -26,8 +26,6 @@ export const activeBoardSlice = createSlice({
     reducers: {
         updateCurrentActiveBoard: (state, action) => {
             //Xử lý dữ liệu ở đây
-
-
             //Update date again currentActiveBoard
             state.currentActiveBoard = action.payload
         }
