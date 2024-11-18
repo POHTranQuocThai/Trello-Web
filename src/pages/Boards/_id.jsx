@@ -9,12 +9,12 @@ import { cloneDeep, isEmpty } from 'lodash'
 import { mapOrder } from '~/utils/sorts'
 import { toast } from 'react-toastify'
 import { fetchBoardDetailsAPI, selectCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 function Board() {
   const dispatch = useDispatch()
-  const board = selectCurrentActiveBoard()
+  const board = useSelector(selectCurrentActiveBoard)
 
   useEffect(() => {
     //Tạm thời fix cứng id (nâng cao sẽ dùng react-router-dom để lấy chuẩn boardId từ URL về)
