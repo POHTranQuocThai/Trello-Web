@@ -6,7 +6,7 @@ import { generatePlaceholderCard } from "~/utils/formatters"
 import { mapOrder } from "~/utils/sorts"
 
 
-const initialSlate = {
+const initialState = {
     currentActiveBoard: null
 }
 //Các hành động gọi api (async) và cập nhật dữ liệu trong redux, dùng middleware createAsyncThunk đi kèm với extraReducers
@@ -27,7 +27,6 @@ export const activeBoardSlice = createSlice({
         updateCurrentActiveBoard: (state, action) => {
             //Xử lý dữ liệu ở đây
 
-
             //Update date again currentActiveBoard
             state.currentActiveBoard = action.payload
         }
@@ -40,7 +39,7 @@ export const activeBoardSlice = createSlice({
 
             board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
 
-            board.colums.forEach(column => {
+            board.columns.forEach(column => {
                 if (isEmpty(column.cards)) {
                     column.cards = [generatePlaceholderCard(column)]
                     column.cardOrderIds = [generatePlaceholderCard(column)._id]
@@ -49,7 +48,7 @@ export const activeBoardSlice = createSlice({
                 }
             })
             //Update date again currentActiveBoard
-            state.currentActiveBoard = action.payload
+            state.currentActiveBoard = board
         })
     }
 })

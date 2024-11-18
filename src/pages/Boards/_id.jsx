@@ -5,33 +5,24 @@ import BoardContent from './BoardContent/BoardContent'
 import { useEffect, useState } from 'react'
 import { createNewCardAPI, createNewColumnAPI, deleteColumnDetailsAPI, fetchBoardDetailsAPI, moveCardToDifferentColumnAPI, updateBoardDetailsAPI, updateColumnDetailsAPI } from '~/apis/index'
 import { generatePlaceholderCard } from '~/utils/formatters'
-import { isEmpty } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 import { mapOrder } from '~/utils/sorts'
 import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentActiveBoard, updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
 
 
 function Board() {
-  const [board, setBoard] = useState(null)
-
+  const dispatch = useDispatch()
+  const board = useSelector(selectCurrentActiveBoard)
   useEffect(() => {
     //Tạm thời fix cứng id (nâng cao sẽ dùng react-router-dom để lấy chuẩn boardId từ URL về)
     //Call API
     const boardId = '66c48c6d6eb222d663158e8f'
-    fetchBoardDetailsAPI(boardId).then(board => {
-      //Sắp xếp thứ tự các column luôn ở đây trước khi đưa dữ liệu xuống bên dưới các component con
-      board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
+    dispatch(fetchBoardDetailsAPI(boardId))
 
-      board.columns.forEach(column => {
-        if (isEmpty(column.cards)) {
-          column.cards = [generatePlaceholderCard(column)]
-          column.cardOrderIds = [generatePlaceholderCard(column)._id]
-        } else {
-          column.cards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
-        }
-      })
-      setBoard(board)
-    })
-  }, [])
+
+  }, [dispatch])
   //Func này có nhiệm vụ gọi API tạo mới Column và làm lại dữ liệu State Board
   const createNewColumn = async (newColumnData) => {
     const createdColumn = await createNewColumnAPI({
@@ -47,10 +38,10 @@ function Board() {
     //Phía FE chúng ta phải tự làm đúng lại state data board (thay vì gọi fetchAPI)
     //Lưu ý: cách làm này phụ thuộc vào tùy lựa chọn và đặc thù dự án, có nơi thì BE sẽ hỗ trợ trả về luôn toàn bộ board
     // dù đây có là api tạo Col hay card đi chăng nữa
-    const newBoard = { ...board }
+    const newBoard = cloneDeep(board)
     newBoard.columns.push(createdColumn)
     newBoard.columnOrderIds.push(createdColumn._id)
-    setBoard(newBoard)
+    dispatch(updateCurrentActiveBoard(newBoard))
   }
 
   const createNewCard = async (newCardData) => {
@@ -59,7 +50,7 @@ function Board() {
       boardId: board._id //gán boardId
     })
 
-    const newBoard = { ...board }
+    const newBoard = cloneDeep(board)
     const columnToUpdate = newBoard.columns.find(column => column._id === createdCard.columnId)
     if (columnToUpdate) {
       //Nếu col rỗng : bản chất là đang chứa placeholder-card
@@ -71,7 +62,7 @@ function Board() {
         columnToUpdate.cardOrderIds.push(createdCard._id)
       }
     }
-    setBoard(newBoard)
+    dispatch(updateCurrentActiveBoard(newBoard))
   }
 
   //Func này có nhiệm vụ goi API và xử lý khi kéo thả Column xong xuôi
@@ -93,13 +84,13 @@ function Board() {
    */
   const moveCardInTheSameColumn = (dndOrderedCards, dndOrderedCardIds, columnId) => {
     //Update cho chuẩn dữ liệu state board
-    const newBoard = { ...board }
+    const newBoard = cloneDeep(board)
     const columnToUpdate = newBoard.columns.find(column => column._id === columnId)
     if (columnToUpdate) {
       columnToUpdate.cards = dndOrderedCards
       columnToUpdate.cardOrderIds = dndOrderedCardIds
     }
-    setBoard(newBoard)
+    dispatch(updateCurrentActiveBoard(newBoard))
     //Goi API
     updateColumnDetailsAPI(columnId, { cardOrderIds: dndOrderedCardIds })
   }
@@ -116,7 +107,7 @@ function Board() {
     const newBoard = { ...board }
     newBoard.columns = dndOrderedColumns
     newBoard.columnOrderIds = dndOrderColumnsIds
-    setBoard(newBoard)
+    dispatch(updateCurrentActiveBoard(newBoard))
     //Gọi API xử lý phía BE
     let prevCardOrderIds = dndOrderedColumns.find(c => c._id === prevColumnId)?.cardOrderIds
     if (prevCardOrderIds[0].includes('placeholder-card')) prevCardOrderIds = []
@@ -133,7 +124,7 @@ function Board() {
     const newBoard = { ...board }
     newBoard.columns = newBoard.columns.filter(c => c._id !== columnId)
     newBoard.columnOrderIds = newBoard.columnOrderIds.filter(_id => _id !== columnId)
-    setBoard(newBoard)
+    dispatch(updateCurrentActiveBoard(newBoard))
     //Goi API
     deleteColumnDetailsAPI(columnId).then(res => {
       toast.success(res?.deleteResult)
