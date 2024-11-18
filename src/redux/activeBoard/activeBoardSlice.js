@@ -56,7 +56,7 @@ export const activeBoardSlice = createSlice({
 
 export const { updateCurrentActiveBoard } = activeBoardSlice.actions
 //Selector nó dóng như useSelector() của React
-export const selectCurrentActiveBoard = () => {
+export const selectCurrentActiveBoard = (state) => {
     return state.activeBoard.currentActiveBoard
 }
 export const activeBoardReducer = activeBoardSlice.reducer 
