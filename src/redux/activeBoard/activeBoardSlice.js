@@ -40,7 +40,7 @@ export const activeBoardSlice = createSlice({
 
             board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
 
-            board.colums.forEach(column => {
+            board.columns.forEach(column => {
                 if (isEmpty(column.cards)) {
                     column.cards = [generatePlaceholderCard(column)]
                     column.cardOrderIds = [generatePlaceholderCard(column)._id]
@@ -49,7 +49,7 @@ export const activeBoardSlice = createSlice({
                 }
             })
             //Update date again currentActiveBoard
-            state.currentActiveBoard = action.payload
+            state.currentActiveBoard = board
         })
     }
 })
