@@ -3,13 +3,13 @@ import AppBar from '~/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
 import { useEffect, useState } from 'react'
-import { createNewCardAPI, createNewColumnAPI, deleteColumnDetailsAPI, fetchBoardDetailsAPI, moveCardToDifferentColumnAPI, updateBoardDetailsAPI, updateColumnDetailsAPI } from '~/apis/index'
+import { createNewCardAPI, createNewColumnAPI, deleteColumnDetailsAPI, moveCardToDifferentColumnAPI, updateBoardDetailsAPI, updateColumnDetailsAPI } from '~/apis/index'
 import { generatePlaceholderCard } from '~/utils/formatters'
 import { cloneDeep, isEmpty } from 'lodash'
 import { mapOrder } from '~/utils/sorts'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentActiveBoard, updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
+import { fetchBoardDetailsAPI, selectCurrentActiveBoard, updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
 
 
 function Board() {
