@@ -6,7 +6,7 @@ import { generatePlaceholderCard } from "~/utils/formatters"
 import { mapOrder } from "~/utils/sorts"
 
 
-const initialSlate = {
+const initialState = {
     currentActiveBoard: null
 }
 //Các hành động gọi api (async) và cập nhật dữ liệu trong redux, dùng middleware createAsyncThunk đi kèm với extraReducers
