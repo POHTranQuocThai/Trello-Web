@@ -8,8 +8,8 @@ import { toast } from 'react-toastify'
 import { createNewColumnAPI } from '~/apis'
 import { generatePlaceholderCard } from '~/utils/formatters'
 import { cloneDeep } from 'lodash'
-import { useDispatch } from 'react-redux'
-import { updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentActiveBoard, updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
 
 
 function ListColumns({ columns }) {

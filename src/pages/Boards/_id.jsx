@@ -3,22 +3,23 @@ import AppBar from '~/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
 import { useEffect } from 'react'
-import { moveCardToDifferentColumnAPI, updateColumnDetailsAPI } from '~/apis/index'
+import { moveCardToDifferentColumnAPI, updateBoardDetailsAPI, updateColumnDetailsAPI } from '~/apis/index'
 import { cloneDeep } from 'lodash'
 import { fetchBoardDetailsAPI, selectCurrentActiveBoard, updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 
 function Board() {
   const dispatch = useDispatch()
   const board = useSelector(selectCurrentActiveBoard)
-
+  const { boardId } = useParams()
   useEffect(() => {
     //Tạm thời fix cứng id (nâng cao sẽ dùng react-router-dom để lấy chuẩn boardId từ URL về)
     //Call API
-    const boardId = '66c48c6d6eb222d663158e8f'
+    // const boardId = '66c48c6d6eb222d663158e8f'
     dispatch(fetchBoardDetailsAPI(boardId))
-  }, [dispatch])
+  }, [dispatch, boardId])
   //Func này có nhiệm vụ gọi API tạo mới Column và làm lại dữ liệu State Board
 
   //Func này có nhiệm vụ goi API và xử lý khi kéo thả Column xong xuôi

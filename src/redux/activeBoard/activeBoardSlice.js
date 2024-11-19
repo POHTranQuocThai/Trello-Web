@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
-import { isEmpty } from "lodash"
-import { API_ROOT } from "~/utils/constants"
-import { generatePlaceholderCard } from "~/utils/formatters"
-import { mapOrder } from "~/utils/sorts"
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { isEmpty } from 'lodash'
+import { API_ROOT } from '~/utils/constants'
+import { generatePlaceholderCard } from '~/utils/formatters'
+import { mapOrder } from '~/utils/sorts'
 
 
 const initialState = {
@@ -57,4 +57,4 @@ export const { updateCurrentActiveBoard } = activeBoardSlice.actions
 export const selectCurrentActiveBoard = (state) => {
     return state.activeBoard.currentActiveBoard
 }
-export const activeBoardReducer = activeBoardSlice.reducer 
+export const activeBoardReducer = activeBoardSlice.reducer
