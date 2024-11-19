@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import viteSvgr from 'vite-plugin-svgr'
+import svg from '@rollup/plugin-svg'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    viteSvgr({
+    svg({
       svgrOptions: {
         icon: true, // Chuyển đổi SVG thành biểu tượng
         exportAsDefault: true
