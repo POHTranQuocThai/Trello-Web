@@ -19,9 +19,10 @@ import { CSS } from '@dnd-kit/utilities'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
 import { useConfirm } from 'material-ui-confirm'
-import { createNewCardAPI } from '~/apis'
+import { createNewCardAPI, deleteColumnDetailsAPI } from '~/apis'
 import { cloneDeep } from 'lodash'
-import { updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
+import { selectCurrentActiveBoard, updateCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Column({ column }) {
   const dispatch = useDispatch()
