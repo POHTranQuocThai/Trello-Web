@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import svgr from 'vite-plugin-svgr'
-import path from 'path'
+import svgr from 'vite-plugin-svgr';
 
+// https://vitejs.dev/config/
 export default defineConfig({
+  //Cho phép thằng vite sử dụng process.env
   define: {
     'process.env': process.env
   },
@@ -11,43 +12,15 @@ export default defineConfig({
     react(),
     svgr({
       svgrOptions: {
-        // Optimize SVG output
-        icon: true,
-        // Make SVG fill-able from parent color
-        expandProps: true,
-        // Generate a default export
-        exportType: 'default',
-        // Output SVG in jsx ready format
-        jsx: {
-          babelConfig: {
-            plugins: [
-              '@svgr/plugin-jsx'
-            ]
-          }
-        },
-        // Clean and optimize SVG output
-        svgo: true
-      },
-      include: '**/*.svg'
+        icon: true, // Chuyển đổi SVG thành biểu tượng
+        exportAsDefault: true
+      }
     })
   ],
+  // base: './'
   resolve: {
-    alias: {
-      '~': path.resolve(__dirname, './src')
-    }
-  },
-  // Ensure assets are properly handled
-  assetsInclude: ['**/*.svg'],
-  // Optimization for build
-  build: {
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          // Add other common dependencies here
-        }
-      }
-    }
+    alias: [
+      { find: '~', replacement: '/src' }
+    ]
   }
 })
