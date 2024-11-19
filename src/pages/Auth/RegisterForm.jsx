@@ -82,6 +82,7 @@ function RegisterForm() {
                 {...register('password-confir', {
                   validate: (value) => {
                     if (value === watch('password')) return true
+                    return PASSWORD_CONFIRMATION_MESSAGE
                   }
                 })}
               />
