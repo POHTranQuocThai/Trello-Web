@@ -12,7 +12,8 @@ export default defineConfig({
     react(),
     viteSvgr({
       svgrOptions: {
-        icon: true // Chuyển đổi SVG thành biểu tượng
+        icon: true, // Chuyển đổi SVG thành biểu tượng
+        exportAsDefault: true
       }
     })
   ],
