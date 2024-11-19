@@ -10,7 +10,11 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    viteSvgr()
+    viteSvgr({
+      svgrOptions: {
+        icon: true // Chuyển đổi SVG thành biểu tượng
+      }
+    })
   ],
   // base: './'
   resolve: {
