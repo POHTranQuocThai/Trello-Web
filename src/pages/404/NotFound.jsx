@@ -1,8 +1,6 @@
-import { Box, Typography, Button, SvgIcon } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 import { Link } from 'react-router-dom'
-import astronautSvg from '~/assets/404/astronaut.svg'
-import planetSvg from '~/assets/404/planet.svg'
 
 function NotFound() {
   return (
@@ -24,7 +22,7 @@ function NotFound() {
           animation: 'stars 12s linear infinite alternate',
           width: '100%',
           height: '100%',
-          backgroundImage: 'url("/src/assets/404/particles.png")',
+          backgroundImage: 'url("/assets/404/particles.png")',
           backgroundSize: 'contain',
           backgroundRepeat: 'repeat',
           backgroundPosition: 'center',
@@ -76,7 +74,8 @@ function NotFound() {
         <Box sx={{ width: '390px', height: '390px', position: 'relative' }}>
           <Box
             component="img"
-            src={astronautSvg}
+            src="/assets/404/astronaut.svg"
+            alt="Astronaut floating"
             sx={{
               width: '50px',
               height: '50px',
@@ -92,7 +91,8 @@ function NotFound() {
           />
           <Box
             component="img"
-            src={planetSvg}
+            src="/assets/404/planet.svg"
+            alt="Planet"
             sx={{
               width: '100%',
               height: '100%'
