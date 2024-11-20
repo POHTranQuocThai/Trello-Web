@@ -262,7 +262,7 @@ function Column({ column }) {
                   '& .MuiOutlinedInput-input': { borderRadius: 1 }
                 }} />
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Button variant='contained' color='success' size='small' onClick={addNewCard}
+                <Button variant='contained' color='success' size='small' onClick={addNewCard} className='interceptor-loading'
                   sx={{
                     height: '100%',
                     boxShadow: 'none',
