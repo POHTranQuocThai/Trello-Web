@@ -5,10 +5,8 @@ import Auth from './pages/Auth/Auth'
 
 function App() {
   return <Routes>
-    <Route path='/' element={<Navigate to='/v1/boards/66c48c6d6eb222d663158e8f' replace={true} />} />
-
-
-    <Route path='/v1/boards/:boardId' element={<Board />} />
+    <Route path='/' element={<Navigate to='/boards/66c48c6d6eb222d663158e8f' replace={true} />} />
+    <Route path='/boards/:boardId' element={<Board />} />
     <Route path='/login' element={<Auth />} />
     <Route path='/register' element={<Auth />} />
     <Route path='*' element={<NotFound />} />
