@@ -10,6 +10,7 @@ const ProtectedRoute = ({ user }) => {
   if (!user) {
     return <Navigate to={'/login'} replace={true} />
   }
+  //Sử dụng Outlet của react-router-dom để hiển thị các Child Route
   return <Outlet />
 }
 function App() {
