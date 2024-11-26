@@ -12,6 +12,7 @@ import {
 import { useConfirm } from 'material-ui-confirm'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { logoutUserAPI, selectCurrentUser } from '~/redux/activeBoard/user/userSlice'
 
 function Profiles() {
@@ -63,11 +64,13 @@ function Profiles() {
           'aria-labelledby': 'basic-button-recent'
         }}
       >
-        <MenuItem sx={{
-          '&:hover': { color: 'success.light' }
-        }}>
-          <Avatar sx={{ width: 28, height: 28, mr: 2 }} src={currentUser?.avatar} /> Profile
-        </MenuItem>
+        <Link style={{ color: 'inherit' }} to={'/settings/account'}>
+          <MenuItem sx={{
+            '&:hover': { color: 'success.light' }
+          }}>
+            <Avatar sx={{ width: 28, height: 28, mr: 2 }} src={currentUser?.avatar} /> Profile
+          </MenuItem>
+        </Link>
         <Divider />
         <MenuItem>
           <ListItemIcon>
