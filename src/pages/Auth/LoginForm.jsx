@@ -19,7 +19,7 @@ import { loginUserAPI } from '~/redux/activeBoard/user/userSlice'
 
 function LoginForm() {
   const dispatch = useDispatch()
-  const nagative = useNavigate()
+  const navigate = useNavigate()
   let [searchParams] = useSearchParams()
   const registeredEmail = searchParams.get('registeredEmail')
   const verifiedEmail = searchParams.get('verifiedEmail')
@@ -30,7 +30,7 @@ function LoginForm() {
       dispatch(loginUserAPI({ email, password })),
       { pending: ' Logging in progress...' }
     ).then(res => {
-      if (!res.error) nagative('/')
+      if (!res.error) navigate('/')
     })
   }
   return (
