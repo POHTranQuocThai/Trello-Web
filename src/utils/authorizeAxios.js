@@ -68,16 +68,16 @@ authorizedAxiosInstance.interceptors.response.use(function (response) {
     }
     //Cần return trường hợp refreshTokenPromise chạy thành công và xử lý thêm ở đây
     // eslint-disable-next-line no-unused-vars
-    return refreshTokenPromise.then(accessToken =>{
-        //B1 : Đối với Trường hợp nếu dự án cần lưu accessToken vào localstorage hoặc đâu đó thì sẽ viết 
-        //thêm code xử lý ở đây.
-        /**
+    return refreshTokenPromise.then(accessToken => {
+      //B1 : Đối với Trường hợp nếu dự án cần lưu accessToken vào localstorage hoặc đâu đó thì sẽ viết
+      //thêm code xử lý ở đây.
+      /**
          * Hiện tại ở đây không cần B1 này vì chúng ta đã đưa accessToken vào cookie (từ BE) sau khi gọi API thành công
          */
-        // axios.default.headers.common['Authorization'] = 'Bearer' + accessToken
+      // axios.default.headers.common['Authorization'] = 'Bearer' + accessToken
 
-        //B2 : quan trọng: Return lại axios instance của chúng ta kết hợp các originalRequests để gọi lại những api ban đầu bị lỗi
-        return authorizedAxiosInstance(originalRequets)
+      //B2 : quan trọng: Return lại axios instance của chúng ta kết hợp các originalRequests để gọi lại những api ban đầu bị lỗi
+      return authorizedAxiosInstance(originalRequets)
     })
   }
   //Xử lý tập trung phần hiển thị thông báo lỗi trả về từ mọi API ở đây
