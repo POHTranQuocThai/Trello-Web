@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import svgr from 'vite-plugin-svgr';
+import viteSvgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,12 +10,11 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    svgr({
+    viteSvgr({
       svgrOptions: {
-        icon: true, // Chuyển đổi SVG thành biểu tượng
-        exportAsDefault: true
-      }
-    })
+        icon: true, // Tự động tối ưu SVG làm icon
+      },
+    }),
   ],
   // base: './'
   resolve: {
