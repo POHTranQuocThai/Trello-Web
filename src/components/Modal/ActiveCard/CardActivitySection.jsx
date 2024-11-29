@@ -6,10 +6,10 @@ import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 
 import { useSelector } from 'react-redux'
-import { selectCurrentUser } from '~/redux/user/userSlice'
+import { selectCurrentActiveCard } from '~/redux/activeCard/activeCardSlice'
 
 function CardActivitySection() {
-  const currentUser = useSelector(selectCurrentUser)
+  const currentUser = useSelector(selectCurrentActiveCard)
 
   const handleAddCardComment = (event) => {
     // Bắt hành động người dùng nhấn phím Enter && không phải hành động Shift + Enter
