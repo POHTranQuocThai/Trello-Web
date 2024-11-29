@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, Chip, Tooltip } from '@mui/material'
+import { Box, Button, Chip, Tooltip } from '@mui/material'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import VpnLockIcon from '@mui/icons-material/VpnLock'
 import AddToDriveIcon from '@mui/icons-material/AddToDrive'
@@ -6,6 +6,7 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { capitalizeFirstLetter } from '~/utils/formatters'
+import BoardUserGroup from './BoardUserGroup'
 
 
 const MENU_STYLE = {
@@ -74,76 +75,7 @@ function BoardBar({ board }) {
             '&:hover': { borderColor: 'white' }
           }}
         >Invite</Button>
-        <AvatarGroup
-          max={5}
-          sx={{
-            gap: 1,
-            '& .MuiAvatar-root': {
-              width: 34,
-              height: 34,
-              fontSize: 16,
-              border: 'none',
-              color: 'white',
-              cursor: 'pointer',
-              '&:first-of-type': { bgcolor: '#a4b0be' }
-            }
-          }}
-        >
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-          <Tooltip title='ThaiDev'>
-            <Avatar
-              alt="ThaiDev"
-              src="https://scontent.fvca1-3.fna.fbcdn.net/v/t39.30808-6/452599383_1328430465209603_1264279381237542282_n.jpg?stp=cp6_dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHQTSXisp8IQDjSCHP7_MbyJ627nP3owngnrbuc_ejCeFG1xe2YMR13H2oq12CP39wPER9uouV21o9Jwkkpllwp&_nc_ohc=ymrMY-YlrZsQ7kNvgHbPum8&_nc_ht=scontent.fvca1-3.fna&oh=00_AYAd-z1wOGilQQ0aeRyERQrcn_U-ff9uLbyz5t_dgnO4yw&oe=66C0937E"
-            />
-          </Tooltip>
-        </AvatarGroup>
+        <BoardUserGroup />
       </Box>
     </Box >
   )
