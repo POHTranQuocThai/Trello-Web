@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { selectCurrentUser, updatedUserAPI } from '~/redux/activeBoard/user/userSlice'
+import { selectCurrentUser, updatedUserAPI } from '~/redux/user/userSlice'
 import VisuallyHiddenInput from '~/components/Form/VisuallyHiddenInput'
 
 

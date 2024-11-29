@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import { useSelector } from 'react-redux'
-import { selectCurrentUser } from '~/redux/activeBoard/user/userSlice'
+import { selectCurrentUser } from '~/redux/user/userSlice'
 
 function Auth() {
   const location = useLocation()

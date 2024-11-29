@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { activeBoardReducer } from './activeBoard/activeBoardSlice'
-import { userReducer } from './activeBoard/user/userSlice'
+import { userReducer } from './user/userSlice'
 import storage from 'redux-persist/lib/storage'
 import persistReducer from 'redux-persist/es/persistReducer'
 import { activeCardReducer } from './activeCard/activeCardSlice'

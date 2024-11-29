@@ -15,7 +15,7 @@ import { EMAIL_RULE, EMAIL_RULE_MESSAGE, FIELD_REQUIRED_MESSAGE, PASSWORD_RULE, 
 import FieldErrorAlert from '~/components/Form/FieldErrorAlert'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { loginUserAPI } from '~/redux/activeBoard/user/userSlice'
+import { loginUserAPI } from '~/redux/user/userSlice'
 
 function LoginForm() {
   const dispatch = useDispatch()
