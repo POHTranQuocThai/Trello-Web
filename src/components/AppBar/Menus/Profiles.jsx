@@ -13,7 +13,7 @@ import { useConfirm } from 'material-ui-confirm'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { logoutUserAPI, selectCurrentUser } from '~/redux/activeBoard/user/userSlice'
+import { logoutUserAPI, selectCurrentUser } from '~/redux/user/userSlice'
 
 function Profiles() {
   const [anchorEl, setAnchorEl] = React.useState(null)

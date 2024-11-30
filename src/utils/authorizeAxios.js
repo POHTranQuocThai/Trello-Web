@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { interceptorLoadingElements } from './formatters'
-import { logoutUserAPI } from '~/redux/activeBoard/user/userSlice'
+import { logoutUserAPI } from '~/redux/user/userSlice'
 import { refreshTokenAPI } from '~/apis'
 
 //Không thể import store redux theo cách thông thường được phải làm như cách below:
@@ -54,15 +54,16 @@ authorizedAxiosInstance.interceptors.response.use(function (response) {
     if (!refreshTokenPromise) {
       refreshTokenPromise = refreshTokenAPI()
         .then(data => {
-        //
-          return data?.accessToken})
+          //
+          return data?.accessToken
+        })
         .catch((_error) => {
-        //Nếu nhận bất kỳ lỗi nào từ gọi api refresh token thì cứ logout luôn
+          //Nếu nhận bất kỳ lỗi nào từ gọi api refresh token thì cứ logout luôn
           axiosReduxStore.dispatch(logoutUserAPI(false))
           return Promise.reject(_error)
         })
         .finally(() => {
-        //Dù API có ok hay lỗi thì vẫn gán cái refreshTokenPromise về null ban đầu
+          //Dù API có ok hay lỗi thì vẫn gán cái refreshTokenPromise về null ban đầu
           refreshTokenPromise = null
         })
     }

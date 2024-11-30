@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { useConfirm } from 'material-ui-confirm'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
-import { logoutUserAPI, updatedUserAPI } from '~/redux/activeBoard/user/userSlice'
+import { logoutUserAPI, updatedUserAPI } from '~/redux/user/userSlice'
 
 function SecurityTab() {
   const dispatch = useDispatch()

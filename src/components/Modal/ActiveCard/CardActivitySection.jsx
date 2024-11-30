@@ -8,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 
+
 function CardActivitySection() {
   const currentUser = useSelector(selectCurrentUser)
 

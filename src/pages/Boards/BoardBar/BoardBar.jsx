@@ -75,7 +75,7 @@ function BoardBar({ board }) {
             '&:hover': { borderColor: 'white' }
           }}
         >Invite</Button>
-        <BoardUserGroup />
+        <BoardUserGroup boardUsers={board?.FE_allUsers} />
       </Box>
     </Box >
   )
