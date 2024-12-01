@@ -1,13 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { isEmpty } from 'lodash'
-import authorizedAxiosInstance from '~/utils/authorizeAxios'
-import { API_ROOT } from '~/utils/constants'
-import { generatePlaceholderCard } from '~/utils/formatters'
-import { mapOrder } from '~/utils/sorts'
+import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState = {
-    currentActiveCard: null
+    currentActiveCard: null,
+    isShowModalActiveCard: false
 }
 //Các hành động gọi api (async) và cập nhật dữ liệu trong redux, dùng middleware createAsyncThunk đi kèm với extraReducers
 
@@ -16,22 +12,29 @@ export const activeCardSlice = createSlice({
     name: 'activeCard',
     initialState,
     reducers: {
+        showModalActiveCard: (state) => {
+            state.isShowModalActiveCard = true
+        },
         updateCurrentActiveCard: (state, action) => {
             //Xử lý dữ liệu ở đây
             //Update date again currentActiveCard
             state.currentActiveCard = action.payload
         },
-        clearCurrentActiveCard: (state, action) => {
+        clearAndHideCurrentActiveCard: (state, action) => {
             state.currentActiveCard = null
+            state.isShowModalActiveCard = false
         }
     },
     //Nơi xử lí đồng bộ
     extraReducers: (builder) => { }
 })
 
-export const { updateCurrentActiveCard, clearCurrentActiveCard } = activeCardSlice.actions
+export const { updateCurrentActiveCard, clearAndHideCurrentActiveCard, showModalActiveCard } = activeCardSlice.actions
 //Selector nó dóng như useSelector() của React
 export const selectCurrentActiveCard = (state) => {
     return state.activeCard.currentActiveCard
+}
+export const selectIsShowModalActiveCard = (state) => {
+    return state.activeCard.isShowModalActiveCard
 }
 export const activeCardReducer = activeCardSlice.reducer

@@ -32,6 +32,7 @@ function Card({ card }) {
   const setActiveCard = () => {
     //Cập nhật data cho cái activeCard trong Redux
     dispatch(updateCurrentActiveCard(card))
+    dispatch(shouldShowCardAction())
   }
   return (
     <MuiCard ref={setNodeRef}

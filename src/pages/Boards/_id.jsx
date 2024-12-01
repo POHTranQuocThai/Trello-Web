@@ -88,7 +88,7 @@ function Board() {
   return (
     <>
       <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
-        {activeCard && <ActiveCard />}
+        <ActiveCard />
         <AppBar />
         <BoardBar board={board} />
         <BoardContent moveCardInTheSameColumn={moveCardInTheSameColumn} moveCardToDifferentColumn={moveCardToDifferentColumn}

@@ -34,7 +34,7 @@ import CardActivitySection from './CardActivitySection'
 
 import { styled } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearCurrentActiveCard, selectCurrentActiveCard, updateCurrentActiveCard } from '~/redux/activeCard/activeCardSlice'
+import { clearAndHideCurrentActiveCard, selectCurrentActiveCard, selectIsShowModalActiveCard, updateCurrentActiveCard } from '~/redux/activeCard/activeCardSlice'
 import { updateCardDetailAPI } from '~/apis'
 import { updateCardInBoard } from '~/redux/activeBoard/activeBoardSlice'
 import { Grid2 } from '@mui/material'
@@ -66,9 +66,10 @@ function ActiveCard() {
   //const handleOpenModal = () => setIsOpen(true)
   const dispatch = useDispatch()
   const activeCard = useSelector(selectCurrentActiveCard)
+  const isShowModalActiveCard = useSelector(selectIsShowModalActiveCard)
   const handleCloseModal = () => {
     //setIsOpen(false)
-    dispatch(clearCurrentActiveCard())
+    dispatch(clearAndHideCurrentActiveCard())
   }
   //Func dùng chung cho các trường hợp update card title, Description, cover,comment...
   const callApiUpdateCard = async (updateData) => {
@@ -100,14 +101,17 @@ function ActiveCard() {
       { pending: 'Updating...' }
     )
   }
+  //Dùng async await ở đây để component con CardActivitySection chờ và nếu thành công thì mới clear thẻ input comment
+  const onAddCardComment = async (commentToAdd) => {
+    await callApiUpdateCard({ commentToAdd })
+  }
   const onUpdateCardDescription = (newDescription) => {
     callApiUpdateCard({ description: newDescription })
-
   }
   return (
     <Modal
       disableScrollLock
-      open={true}
+      open={isShowModalActiveCard}
       onClose={handleCloseModal} // Sử dụng onClose trong trường hợp muốn đóng Modal bằng nút ESC hoặc click ra ngoài Modal
       sx={{ overflowY: 'auto' }}>
       <Box sx={{
@@ -179,7 +183,8 @@ function ActiveCard() {
               </Box>
 
               {/* Feature 04: Xử lý các hành động, ví dụ comment vào Card */}
-              <CardActivitySection />
+              <CardActivitySection cardComments={activeCard?.comments}
+                onAddCardComment={onAddCardComment} />
             </Box>
           </Grid2>
 
