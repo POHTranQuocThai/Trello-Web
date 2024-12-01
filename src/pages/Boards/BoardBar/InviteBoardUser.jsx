@@ -32,6 +32,8 @@ function InviteBoardUser({ boardId }) {
       // Clear thẻ input sử dụng react-hook-form bằng setValue
       setValue('inviteeEmail', null)
       setAnchorPopoverElement(null)
+      //Mời một người dùng vào board xong thì cũng sẽ gửi/emit sự kiện socket lên server
+
     })
   }
 

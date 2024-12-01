@@ -6,7 +6,6 @@ import Workspaces from './Menus/Workspaces'
 import Recent from './Menus/Recent'
 import Starred from './Menus/Starred'
 import Templates from './Menus/Templates'
-import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications'
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation'
 import Profiles from './Menus/Profiles'
 import { LibraryAdd } from '@mui/icons-material'
@@ -14,7 +13,8 @@ import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import SvgIcon from '@mui/material/SvgIcon'
+//import SvgIcon from '@mui/material/SvgIcon'
+import Notifications from './Notifications/Notifications'
 
 
 function AppBar() {
@@ -85,11 +85,7 @@ function AppBar() {
             }
           }} />
         <ModeSelect />
-        <Tooltip title='Notification' >
-          <Badge color="warning" variant="dot" sx={{ cursor: 'pointer' }}>
-            <CircleNotificationsIcon sx={{ color: 'white' }} />
-          </Badge>
-        </Tooltip>
+        <Notifications />
         <Tooltip title='Help'>
           <NotListedLocationIcon sx={{ cursor: 'pointer', color: 'white' }} />
         </Tooltip>
