@@ -4,7 +4,6 @@ import { userReducer } from './user/userSlice'
 import storage from 'redux-persist/lib/storage'
 import persistReducer from 'redux-persist/es/persistReducer'
 import { activeCardReducer } from './activeCard/activeCardSlice'
-import { notification } from 'antd'
 import { notificationsReducer } from './notifications/notificationsSlice'
 
 const rootPersistConfig = {
