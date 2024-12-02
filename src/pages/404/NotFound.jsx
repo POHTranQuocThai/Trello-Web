@@ -5,6 +5,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import SvgIcon from '@mui/material/SvgIcon'
 //import { ReactComponent as PlanetSvg } from '~/assets/404/planet.svg'
 //import { ReactComponent as AstronautSvg } from '~/assets/404/astronaut.svg'
+
 import { Link } from 'react-router-dom'
 function NotFound() {
   return (

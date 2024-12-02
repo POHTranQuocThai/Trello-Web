@@ -1,5 +1,5 @@
 
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
+import { extendTheme } from '@mui/material/styles'
 
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '56px'
