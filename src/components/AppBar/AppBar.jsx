@@ -1,4 +1,4 @@
-import { Badge, Box, Button, InputAdornment, TextField, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Tooltip, Typography } from '@mui/material'
 import ModeSelect from '~/components/ModeSelect/ModeSelect'
 import AppsIcon from '@mui/icons-material/Apps'
 //import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
@@ -9,16 +9,13 @@ import Templates from './Menus/Templates'
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation'
 import Profiles from './Menus/Profiles'
 import { LibraryAdd } from '@mui/icons-material'
-import SearchIcon from '@mui/icons-material/Search'
-import CloseIcon from '@mui/icons-material/Close'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 //import SvgIcon from '@mui/material/SvgIcon'
 import Notifications from './Notifications/Notifications'
+import AutoCompleteSearchBoard from './SearchBoards/AutoCompleteSearchBoard'
+import { Link } from 'react-router-dom'
 
 
 function AppBar() {
-  const [searchValue, setSearchValue] = useState('')
   return (
     <Box
       px={2}
@@ -58,32 +55,8 @@ function AppBar() {
 
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <TextField
-          id="outlined-search" label="Search..." type="text" size='small' value={searchValue} onChange={(e) => setSearchValue(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: 'white' }} />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <CloseIcon
-                  sx={{ color: 'white', cursor: 'pointer' }}
-                  fontSize='small'
-                  onClick={() => setSearchValue('')}
-                />
-              </InputAdornment>
-            )
-          }}
-          sx={{
-            minWidth: '120px', maxWidth: '180px', '& label': { color: 'white' }, '& input': { color: 'white' }, '& label.Mui-focused': { color: 'white' },
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': { borderColor: 'white' },
-              '&:hover fieldset': { borderColor: 'white' },
-              '&.Mui-focused fieldset': { borderColor: 'white' }
-            }
-          }} />
+        {/* Tìm kiếm nhanh 1 or nhiều  */}
+        <AutoCompleteSearchBoard />
         <ModeSelect />
         <Notifications />
         <Tooltip title='Help'>
