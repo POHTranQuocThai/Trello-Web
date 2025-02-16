@@ -1,6 +1,10 @@
-ACCOUNT INFOR
+ACCOUNT INFOR 
 email: tranthai.070104@gmail.com
-mk: kirito2040
+pass: kirito2020
+
+ACCOUNT INFO 2
+email: thaisalem2040@gmail.com
+pass: kirito2020
 
 **RUN PROJECT**
 npm install or yarn install
@@ -22,8 +26,12 @@ Trello is a project management tool and teamwork online, using Kanban methods to
   
 **THE MAIN FUNCTIONS ARE IN THE PROJECT**
 * LOGIN, LOGOUT & SIGNUP
+* DARK MODE
+* SAVE IMAGES UP CLOUDINARY
 * CRUD BOARDS, COLUMNS, CARDS
 * DROP AND DRAG COLUMNS, CARDS
-* SEND NOTIFICATION TO USERS WHO JOIN THE BOARDS
+* SEND NOTIFICATION TO USERS WHO JOIN THE BOARDS BY SOCKET IO
 * SEARCH THE BOARDS
 * UPDATE PROFILE
+* MARKDOWN-EDIT
+* COMMENT IN ACTIVE CARD
