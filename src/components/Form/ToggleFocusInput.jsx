@@ -51,7 +51,9 @@ function ToggleFocusInput({ value, onChangedValue, inputFontSize = '16px', ...pr
           px: '6px',
           overflow: 'hidden',
           whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis'
+          textOverflow: 'ellipsis',
+          color: (theme) =>
+            theme.palette.mode === 'dark' ? 'white' : 'black'
         }
       }}
     />

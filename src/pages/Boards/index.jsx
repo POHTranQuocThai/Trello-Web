@@ -86,11 +86,17 @@ function Boards() {
   }
 
   return (
-    <Container disableGutters maxWidth={false}>
+    <Container disableGutters maxWidth={false} sx={{
+      bgcolor: (theme) =>
+        theme.palette.mode === 'dark' ? '#333643' : ''
+    }}>
       <AppBar />
       <Box sx={{ paddingX: 2, my: 4 }}>
         <Grid container spacing={2}>
-          <Grid xs={12} sm={3}>
+          <Grid item xs={12} sm={3} sx={{
+            color: (theme) =>
+              theme.palette.mode === 'dark' ? 'white' : 'black'
+          }}>
             <Stack direction="column" spacing={1}>
               <SidebarItem className="active">
                 <SpaceDashboardIcon fontSize="small" />
@@ -111,20 +117,32 @@ function Boards() {
             </Stack>
           </Grid>
 
-          <Grid xs={12} sm={9}>
-            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 3 }}>Your boards:</Typography>
+          <Grid item xs={12} sm={9}>
+            <Typography variant="h4" sx={{
+              fontWeight: 'bold', mb: 3, color: (theme) =>
+                theme.palette.mode === 'dark' ? 'white' : 'black'
+            }}>Your boards:</Typography>
 
             {/* Trường hợp gọi API nhưng không tồn tại cái board nào trong Database trả về */}
             {boards?.length === 0 &&
-              <Typography variant="span" sx={{ fontWeight: 'bold', mb: 3 }}>No result found!</Typography>
+              <Typography variant="span" sx={{
+                fontWeight: 'bold', mb: 3,
+                color: (theme) =>
+                  theme.palette.mode === 'dark' ? 'white' : 'black'
+              }}>No result found!</Typography>
             }
 
             {/* Trường hợp gọi API và có boards trong Database trả về thì render danh sách boards */}
             {boards?.length > 0 &&
               <Grid container spacing={2}>
                 {boards.map(b =>
-                  <Grid xs={2} sm={3} md={4} key={b._id}>
-                    <Card sx={{ width: '250px' }}>
+                  <Grid item xs={2} sm={3} md={4} key={b._id}>
+                    <Card sx={{
+                      width: '250px', bgcolor: (theme) =>
+                        theme.palette.mode === 'dark' ? '#C0C0C0' : '',
+                      color: (theme) =>
+                        theme.palette.mode === 'dark' ? 'white' : 'black'
+                    }}>
                       {/* Ý tưởng mở rộng về sau làm ảnh Cover cho board nhé */}
                       {/* <CardMedia component="img" height="100" image="https://picsum.photos/100" /> */}
                       <Box sx={{ height: '50px', backgroundColor: randomColor() }}></Box>
@@ -141,7 +159,7 @@ function Boards() {
                         </Typography>
                         <Box
                           component={Link}
-                          to={`boards/${b._id}`}
+                          to={`/boards/${b._id}`}
                           sx={{
                             mt: 1,
                             display: 'flex',
@@ -174,11 +192,16 @@ function Boards() {
                   // Render các page item và đồng thời cũng là những cái link để chúng ta click chuyển trang
                   renderItem={(item) => (
                     <PaginationItem
+                      sx={{
+                        color: (theme) =>
+                          theme.palette.mode === 'dark' ? 'white' : 'black'
+                      }}
                       component={Link}
                       to={`/boards${item.page === DEFAULT_PAGE ? '' : `?page=${item.page}`}`}
                       {...item}
                     />
                   )}
+
                 />
               </Box>
             }

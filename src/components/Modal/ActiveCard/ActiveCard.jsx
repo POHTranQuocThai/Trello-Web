@@ -37,7 +37,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearAndHideCurrentActiveCard, selectCurrentActiveCard, selectIsShowModalActiveCard, updateCurrentActiveCard } from '~/redux/activeCard/activeCardSlice'
 import { updateCardDetailAPI } from '~/apis'
 import { updateCardInBoard } from '~/redux/activeBoard/activeBoardSlice'
-import { Grid2 } from '@mui/material'
+import { Grid } from '@mui/material'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import { CARD_MEMBER_ACTIONS } from '~/utils/constants'
 const SidebarItem = styled(Box)(({ theme }) => ({
@@ -152,7 +152,10 @@ function ActiveCard() {
           </Box>}
 
         <Box sx={{ mb: 1, mt: -3, pr: 2.5, display: 'flex', alignItems: 'center', gap: 1 }}>
-          <CreditCardIcon />
+          <CreditCardIcon sx={{
+            color: (theme) =>
+              theme.palette.mode === 'dark' ? 'white' : 'black'
+          }} />
 
           {/* Feature 01: Xử lý tiêu đề của Card */}
           <ToggleFocusInput
@@ -161,9 +164,12 @@ function ActiveCard() {
             onChangedValue={onUpdateCardTitle} />
         </Box>
 
-        <Grid2 container spacing={2} sx={{ mb: 3 }}>
+        <Grid container spacing={2} sx={{ mb: 3, width: '100%', flexGrow: 1 }}>
           {/* Left side */}
-          <Grid2 xs={12} sm={9}>
+          <Grid item xs={12} sm={9} sx={{
+            color: (theme) =>
+              theme.palette.mode === 'dark' ? 'white' : 'black'
+          }}>
             <Box sx={{ mb: 3 }}>
               <Typography sx={{ fontWeight: '600', color: 'primary.main', mb: 1 }}>Members</Typography>
 
@@ -192,10 +198,10 @@ function ActiveCard() {
               <CardActivitySection cardComments={activeCard?.comments}
                 onAddCardComment={onAddCardComment} />
             </Box>
-          </Grid2>
+          </Grid>
 
           {/* Right side */}
-          <Grid2 xs={12} sm={3}>
+          <Grid item xs={12} sm={3}>
             <Typography sx={{ fontWeight: '600', color: 'primary.main', mb: 1 }}>Add To Card</Typography>
             <Stack direction="column" spacing={1}>
               {/* Feature 05: Xử lý hành động bản thân user tự join vào card */}
@@ -243,8 +249,8 @@ function ActiveCard() {
               <SidebarItem><ArchiveOutlinedIcon fontSize="small" />Archive</SidebarItem>
               <SidebarItem><ShareOutlinedIcon fontSize="small" />Share</SidebarItem>
             </Stack>
-          </Grid2>
-        </Grid2>
+          </Grid>
+        </Grid>
       </Box>
     </Modal>
   )

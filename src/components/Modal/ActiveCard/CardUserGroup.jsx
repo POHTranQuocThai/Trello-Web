@@ -31,7 +31,7 @@ function CardUserGroup({ cardMemberIds = [], onUpdateCardMemebers }) {
     //Tạo một biến incomingMemberInfo gửi về BE, với 2 thông tin chính là userId và action là xóa khỏi card hoặc thêm vào card 
     const incomingMemberInfo = {
       userId: user._id,
-      action: cardMemberIds.includes(user._id) ? CARD_MEMBER_ACTIONS.REMOVE : CARD_MEMBER_ACTIONS.REMOVE
+      action: cardMemberIds.includes(user._id) ? CARD_MEMBER_ACTIONS.REMOVE : CARD_MEMBER_ACTIONS.ADD
     }
     onUpdateCardMemebers(incomingMemberInfo)
   }

@@ -1,10 +1,9 @@
-import { Box, Button, Chip, Tooltip } from '@mui/material'
+import { Box, Chip, Tooltip } from '@mui/material'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import VpnLockIcon from '@mui/icons-material/VpnLock'
 import AddToDriveIcon from '@mui/icons-material/AddToDrive'
 import BoltIcon from '@mui/icons-material/Bolt'
 import FilterListIcon from '@mui/icons-material/FilterList'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { capitalizeFirstLetter } from '~/utils/formatters'
 import BoardUserGroup from './BoardUserGroup'
 import InviteBoardUser from './InviteBoardUser'
@@ -39,7 +38,7 @@ function BoardBar({ board }) {
           theme.palette.mode === 'dark' ? '#2c3e50' : '#1975dc'
         ),
         paddingX: 2,
-        '&::-webkit-scrollbar-track': { m: 2 }
+        '&::-webkit-scrollbar-track': { m: 2 },
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

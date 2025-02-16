@@ -1,6 +1,6 @@
 
 import { extendTheme } from '@mui/material/styles'
-
+import { teal, deepOrange, cyan, orange } from '@mui/material/colors'
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '56px'
 const APP_BAR_HEIGHT = '58px'
@@ -14,20 +14,20 @@ const theme = extendTheme({
     column_header_height: COLUMN_HEADER_HEIGHT,
     column_footer_height: COLUMN_FOOTER_HEIGHT
   },
-  // colorSchemes: {
-  //   light: {
-  //     palette: {
-  //       // primary: teal,
-  //       // secondary: deepOrange
-  //     }
-  //   },
-  //   dark: {
-  //     palette: {
-  //       primary: cyan,
-  //       secondary: orange
-  //     }
-  //   }
-  // },
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: teal,
+        secondary: deepOrange
+      }
+    },
+    dark: {
+      palette: {
+        primary: cyan,
+        secondary: orange
+      }
+    }
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: {

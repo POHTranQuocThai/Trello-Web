@@ -41,7 +41,7 @@ function AutoCompleteSearchBoard() {
     // Gọi API...
     setLoading(true)
     fetchBoardsAPI(searchPath)
-      .then(res => { res.boards || [] })
+      .then(res => { setBoards(res.boards || []) })
       .finally(() => {//Lưu ý việc setLoading luôn phải chạy trong finaly
         setLoading(false)
       })

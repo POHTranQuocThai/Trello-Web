@@ -45,6 +45,12 @@ function CardActivitySection({ cardComments = [], onAddCardComment }) {
           type="text"
           variant="outlined"
           multiline
+          sx={{
+            '& .MuiOutlinedInput-input': {
+              color: (theme) =>
+                theme.palette.mode === 'dark' ? 'white' : 'black'
+            }
+          }}
           onKeyDown={handleAddCardComment}
         />
       </Box>
